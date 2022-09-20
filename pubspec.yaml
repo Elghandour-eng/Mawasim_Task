@@ -31,7 +31,8 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   # Flutter Toast
   fluttertoast: ^8.0.9
-  # Carousel
+  # Responsive
+  flutter_screenutil:
 
 dev_dependencies:
   flutter_test:
