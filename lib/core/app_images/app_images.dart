@@ -13,5 +13,13 @@ abstract class AppImages {
   ///combine 2 layers with Figma
   static const String forgetPass = '${imagesPath}forgetpass.png';
 
+  ///SelectOption
+  ///combine 2 layers with Figma
+  static const String vEmail = '${imagesPath}vEmail.png';
+  static const String vPhone = '${imagesPath}vPhone.png';
+  static const String emailIcon = '${imagesPath}emailicon.png';
+  static const String vertify = '${imagesPath}vertify.png';
+  static const String mobileIcon = '${imagesPath}mobile-app (1).png';
+
 
 }

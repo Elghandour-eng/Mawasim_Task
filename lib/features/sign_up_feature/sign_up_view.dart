@@ -24,7 +24,7 @@ class SignUpView extends StatelessWidget {
           child:
           SizedBox(
             height: MediaQuery.of(context).orientation == Orientation.landscape
-                ? 1.75.sh
+                ? 1.8.sh
                 : 1.sh,
             width: 1.sw,
             child: Stack(

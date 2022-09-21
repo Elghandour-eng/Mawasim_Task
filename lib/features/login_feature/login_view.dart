@@ -31,7 +31,7 @@ class LoginView extends StatelessWidget {
           child: SizedBox(
             height: MediaQuery.of(context).orientation == Orientation.landscape
                 ? 1.65.sh
-                : 1.15.sh,
+                : 1.12.sh,
             width: 1.sw,
             child: Column(
               children: [

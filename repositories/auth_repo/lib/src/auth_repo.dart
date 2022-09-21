@@ -2,6 +2,7 @@ import 'package:auth_repo/src/models/register_response.dart';
 import 'package:dio/dio.dart';
 
 import '../auth_repo.dart';
+import 'models/activate_response.dart';
 
 class AuthenticationRepository {
   AuthenticationRepository({Dio? dio})
@@ -68,6 +69,27 @@ class AuthenticationRepository {
     );
     return RegisterResponse.fromJson(res.data);
   }
+
+  /// Activate Email.
+  ///
+  /// [Email] parameter is the user national id number.
+  /// [Type] parameter is phone or email.
+
+  Future<ActivateResponse> activatePhoneOrEmail({
+    required String email,
+    required String type,
+  }) async {
+    var res = await _dio.post(
+      "active-phone-or-email",
+      data: {
+        "email": type == 'phone'?"":email,
+        "type":type,
+        "phone":type == 'phone'?email:""
+      },
+    );
+    return ActivateResponse.fromJson(res.data);
+  }
+
 
 
 

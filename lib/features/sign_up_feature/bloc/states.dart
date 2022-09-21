@@ -29,3 +29,21 @@ class SignUpFailure extends SignIUpState {
   @override
   List<Object?> get props => [error];
 }
+
+class CodeSendSuccess extends SignIUpState {
+  final String? code;
+
+  const CodeSendSuccess({required this.code});
+
+  @override
+  List<Object?> get props => [code];
+}
+
+class CodeSendFailure extends SignIUpState {
+  final String? err;
+
+  const CodeSendFailure({required this.err});
+
+  @override
+  List<Object?> get props => [err];
+}

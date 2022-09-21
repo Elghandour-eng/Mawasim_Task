@@ -40,7 +40,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
      debugPrint(e.message);
      emit(const SignInFailure(error: 'تحقق من اتصالك بالانترنت'));
    } catch (err) {
-     emit(const SignInFailure(error: 'الرقم القومي أو كلمة المرور غير صحيحة'));
+     emit(const SignInFailure(error: 'البريد الالكتروني أو كلمة المرور غير صحيحة'));
     }
   }
 }

@@ -26,3 +26,19 @@ class SignUpButtonPressed extends SignUpEvent {
   List<Object?> get props =>
       [email, password, deviceId, firebaseToken, confirmPassword, phone, name];
 }
+
+
+class SendActivationCode extends SignUpEvent {
+  final String email;
+  final String type;
+
+
+  const SendActivationCode(
+      {required this.email,
+        required this.type,
+});
+
+  @override
+  List<Object?> get props =>
+      [email, type];
+}

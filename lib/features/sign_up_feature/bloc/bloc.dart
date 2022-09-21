@@ -15,6 +15,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignIUpState> {
       : _authenticationRepository = authenticationRepository,
         super(SignUpInitial()) {
     on<SignUpButtonPressed>(_onSignUpButtonPressed);
+    on<SendActivationCode>(_onSendActivationCode);
   }
 
   static SignUpBloc get(context) => BlocProvider.of(context);
@@ -47,7 +48,29 @@ class SignUpBloc extends Bloc<SignUpEvent, SignIUpState> {
      debugPrint(e.message);
     emit(const SignUpFailure(error: 'تحقق من اتصالك بالانترنت'));
     } catch (err) {
-    emit(const SignUpFailure(error: 'الرقم القومي أو كلمة المرور غير صحيحة'));
+    emit(const SignUpFailure(error: 'البريد الالكتروني أو كلمة المرور غير صحيحة'));
     }
   }
+
+
+  void _onSendActivationCode(
+      SendActivationCode event, Emitter<SignIUpState> emit) async {
+    emit(SignUpLoadingProgress());
+    try {
+      var user = await _authenticationRepository.activatePhoneOrEmail(
+          email: event.email,
+          type: event.type,
+      );
+      emit(CodeSendSuccess(code: user.data?.code.toString()));
+
+      emit(SignUpInitial());
+    } on SocketException catch (e) {
+      debugPrint(e.message);
+      emit(const CodeSendFailure(err: 'تحقق من اتصالك بالانترنت'));
+    } catch (err) {
+     // print(err);
+      emit(const CodeSendFailure(err: 'حدث خطأ ما'));
+    }
+  }
+
 }

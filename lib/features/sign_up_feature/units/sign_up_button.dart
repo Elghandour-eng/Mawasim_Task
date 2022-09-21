@@ -6,7 +6,7 @@ import 'package:motion_toast/resources/arrays.dart';
 
 import '../../../core/router/router.dart';
 import '../../login_feature/login_view.dart';
-import '../../services_features/view.dart';
+import '../../select_email_or_phone_feature/select_view.dart';
 import '../bloc/bloc.dart';
 
 class SignUpButton extends StatelessWidget {
@@ -17,7 +17,9 @@ class SignUpButton extends StatelessWidget {
     return BlocConsumer<SignUpBloc,SignIUpState>(
         listener: (context,state) {
           if(state is SignUpSuccess) {
-            MagicRouter.navigateTo(const ServicesView() );
+            MagicRouter.navigateTo( SelectOptionToActivateView(name: state.user.name??'',
+            phone: SignUpBloc.get(context).phoneController.text,email: state.user.email??''
+                  '',) );
           } else if (state is SignUpFailure){
             MotionToast.error(
               title:const  Text("حدث خطا ما"),
@@ -44,10 +46,7 @@ class SignUpButton extends StatelessWidget {
                   password: SignUpBloc.get(context).passwordController.text.trim(),
                   confirmPassword: SignUpBloc.get(context).confirmPasswordController.text.trim(),
                   phone: SignUpBloc.get(context).phoneController.text.trim(),
-                  name: SignUpBloc.get(context).passwordController.text.trim(),
-
-
-
+                  name: SignUpBloc.get(context).nameController.text.trim(),
                   deviceId: 'we',
                   firebaseToken: 'wewe',
                 ));
