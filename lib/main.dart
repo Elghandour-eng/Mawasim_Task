@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mawasim_task/core/color_manager/color_manager.dart';
+import 'package:mawasim_task/features/sign_up_feature/bloc/bloc.dart';
 import 'package:mawasim_task/widgets/pop_scaffold.dart';
+import 'core/app_constants/constants.dart';
 import 'core/router/router.dart';
+import 'core/utils/observer.dart';
+import 'features/login_feature/bloc/bloc.dart';
 import 'features/login_feature/login_view.dart';
 //import 'package:flutter/services.dart';
+import 'package:auth_repo/auth_repo.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   /** To Close LandScape */
   // SystemChrome.setPreferredOrientations(
   //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(MawasimTask());
+  /** Bloc Observer */
+  Bloc.observer = AppBlocObserver();
+  runApp(
+      /** Repos of App */
+      MultiRepositoryProvider(
+    providers: [
+      RepositoryProvider<AuthenticationRepository>(
+          create: (context) => AuthenticationRepository()),
+    ],
+    child: const MawasimTask(),
+  ));
 }
 
 class MawasimTask extends StatelessWidget {
@@ -18,56 +35,38 @@ class MawasimTask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) => MaterialApp(
-        navigatorKey: navigatorKey,
-        onGenerateRoute: onGenerateRoute,
-        debugShowCheckedModeBanner: false,
-        builder: (context, child) => PopScaffold(child: child),
-        theme: ThemeData(
-          scaffoldBackgroundColor: ColorManager.scaffoldBackGroundColor,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
-          textTheme: TextTheme(
-            headline1: TextStyle(
-                fontSize: 16.sp,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w600,
-                color: ColorManager.textColor1,
-                fontFamily: 'Tajawal'),
-            headline4: TextStyle(
-                fontSize: 13.sp,
-                //fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w600,
-                color: ColorManager.textColor2,
-                decoration: TextDecoration.underline,
-                fontFamily: 'Tajawal'),
-            headline5: TextStyle(
-                fontSize: 13.sp,
-                //fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w600,
-                color: ColorManager.textColor1,
-                decoration: TextDecoration.underline,
-                fontFamily: 'Tajawal'),
-            headline3: TextStyle(
-                fontSize: 16.sp,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w600,
-                color: ColorManager.textColor2,
-                fontFamily: 'Tajawal'),
-            headline2: TextStyle(
-              fontSize: 14.0.sp,
-              fontFamily: 'Tajawal',
-              color: ColorManager.textColor2,
-            ),
-          ),
-        ),
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<SignInBloc>(
+              create: (context) => SignInBloc(
+                    authenticationRepository:
+                        RepositoryProvider.of<AuthenticationRepository>(
+                            context),
+                  )),
+          BlocProvider<SignUpBloc>(
+              create: (context) => SignUpBloc(
+                authenticationRepository:
+                RepositoryProvider.of<AuthenticationRepository>(
+                    context),
+              )),
+        ],
+        child: ScreenUtilInit(
+          designSize: const Size(360, 690),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (context, child) => MaterialApp(
+            navigatorKey: navigatorKey,
+            onGenerateRoute: onGenerateRoute,
+            debugShowCheckedModeBanner: false,
+            builder: (context, child) => PopScaffold(child: child),
+            theme: ThemeData(
+                scaffoldBackgroundColor: ColorManager.scaffoldBackGroundColor,
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
+                textTheme: textTheme),
 
-        //const for now
-        home: const LoginView(),
-      ),
-    );
+            //const for now
+            home: const LoginView(),
+          ),
+        ));
   }
 }

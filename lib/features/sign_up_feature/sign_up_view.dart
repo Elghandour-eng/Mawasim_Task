@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mawasim_task/core/app_images/app_images.dart';
+import 'package:mawasim_task/core/validator/validator.dart';
 import 'package:mawasim_task/features/login_feature/login_view.dart';
+import 'package:mawasim_task/features/sign_up_feature/bloc/bloc.dart';
+import 'package:mawasim_task/features/sign_up_feature/units/sign_up_button.dart';
 import 'package:mawasim_task/widgets/bottom_image.dart';
 import 'package:mawasim_task/widgets/custom_text_field.dart';
 import 'package:mawasim_task/widgets/pop_scaffold.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-part 'sign_up_fields.dart';
+
+part 'units/sign_up_fields.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({Key? key}) : super(key: key);
@@ -38,11 +42,7 @@ class SignUpView extends StatelessWidget {
                       text3: 'تسجيل جديد',
                     ),
                     const _SignUpFieldsView(),
-                    const AuthButton(
-                      body1: 'لدي حساب بالفعل    ',
-                      body2: 'تسجيل دخول',
-                      text: 'تسجيل',
-                    )
+                    const SignUpButton()
                   ],
                 ),
 
