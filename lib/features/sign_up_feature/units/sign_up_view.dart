@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 
-class ForgetPassView extends StatelessWidget {
-  const ForgetPassView({Key? key}) : super(key: key);
+class SignUpView extends StatelessWidget {
+  const SignUpView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

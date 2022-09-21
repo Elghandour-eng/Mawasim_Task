@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class PopScaffold extends StatelessWidget {
   final Widget? child;
@@ -10,7 +10,8 @@ class PopScaffold extends StatelessWidget {
         child: SafeArea(
           child: Directionality(
             textDirection: TextDirection.ltr,
-            child: child ?? const SizedBox(),
+            child: Scaffold(
+                body: child ?? const SizedBox()),
           ),
         ),
         onTap:
