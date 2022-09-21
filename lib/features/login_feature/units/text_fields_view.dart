@@ -34,8 +34,11 @@ class _TextFieldsView extends StatelessWidget {
           child: Row(
             children: [
               const SizedBox(height: 5,),
-              CustomText(text: 'نسيت كلمة السر ؟',
-              textStyle: Theme.of(context).textTheme.headline4,)],
+              GestureDetector(
+                onTap: ()=>MagicRouter.navigateTo(const ForgetPassView()),
+                child: CustomText(text: 'نسيت كلمة السر ؟',
+                textStyle: Theme.of(context).textTheme.headline4,),
+              )],
           ),
         ),
       ],

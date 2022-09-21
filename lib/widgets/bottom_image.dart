@@ -14,14 +14,11 @@ class BottomImage extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomLeft,
       child: SizedBox(
-          height: .3.sh,
+          height: .35.sh,
           width: .85.sw,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Image.asset(
-              image??AppImages.loginIllustration,
-              fit: BoxFit.fill,),
-          )),
+          child: Image.asset(
+            image??AppImages.loginIllustration,
+            fit: BoxFit.fill,)),
     );
   }
 }
