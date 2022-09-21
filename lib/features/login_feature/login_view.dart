@@ -25,7 +25,9 @@ class LoginView extends StatelessWidget {
         child: SingleChildScrollView(
           physics:const BouncingScrollPhysics(),
           child: SizedBox(
-            height: 1.1.sh,
+            height: MediaQuery.of(context).orientation == Orientation.landscape
+                ? 1.65.sh
+                : 1.05.sh,
             width: 1.sw,
             child: Column(
               children: [

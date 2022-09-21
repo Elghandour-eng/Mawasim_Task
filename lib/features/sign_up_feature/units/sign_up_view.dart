@@ -19,7 +19,9 @@ class SignUpView extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           child:
           SizedBox(
-            height: 1.sh,
+            height: MediaQuery.of(context).orientation == Orientation.landscape
+                ? 1.75.sh
+                : 1.sh,
             width: 1.sw,
             child: Stack(
               children: [

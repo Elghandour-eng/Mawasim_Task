@@ -19,7 +19,9 @@ class ForgetPassView extends StatelessWidget {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: SizedBox(
-            height: 1.sh,
+            height: MediaQuery.of(context).orientation == Orientation.landscape
+                ? 1.5.sh
+                : 1.sh,
             width: 1.sw,
             child: Column(
               children: [
@@ -46,7 +48,8 @@ class ForgetPassView extends StatelessWidget {
                 // const _LoginButton(),
                 const AuthButton(
                   text: 'ارسال',
-                  showBottom: false,
+                  body1: 'لم يتم الارسال  ',
+                  body2: 'اعادة المحاوله',
                 ),
                 const Spacer(),
                 const BottomImage(
