@@ -17,8 +17,8 @@ class SignUpButton extends StatelessWidget {
     return BlocConsumer<SignUpBloc,SignIUpState>(
         listener: (context,state) {
           if(state is SignUpSuccess) {
-            MagicRouter.navigateTo( SelectOptionToActivateView(name: state.user.name??'',
-            phone: SignUpBloc.get(context).phoneController.text,email: state.user.email??''
+            MagicRouter.navigateAndPopAll( SelectOptionToActivateView(name: state.user.name??'',
+            phone: state.user.phone,email: state.user.email??''
                   '',) );
           } else if (state is SignUpFailure){
             MotionToast.error(

@@ -60,22 +60,32 @@ class SelectOptionToActivateView extends StatelessWidget {
                   const SizedBox(
                     height: 50,
                   ),
-                  sendCodeContainer(context: context, onTap: () {
-                     SignUpBloc.get(context).add(SendActivationCode(email: phone??'', type: 'phone'));
-                  }),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                 
-           sendCodeContainer(
+                  Column(
+                    children: [
+                      sendCodeContainer(
+                          phone: true,
+                          email: phone,
+                          context: context, onTap: () {
+                         SignUpBloc.get(context).add(SendActivationCode(email: phone??'', type: 'phone'));
+                      }),
+                      const SizedBox(
+                        height: 20,
+                      ),
+
+                      sendCodeContainer(
                           context: context,
                           text1: 'البريد الالكتروني',
                           text2: 'رجاء ادخال البريد الالكتروني لارسال كود التحقق',
+                          phone: false,
+                          email: email,
                           image: AppImages.emailIcon,
                           onTap: () {
                             SignUpBloc.get(context).add(SendActivationCode(email: email??'', type: 'email'));
 
                           })
+                    ],
+                  ),
+
          
                 ],
               ),

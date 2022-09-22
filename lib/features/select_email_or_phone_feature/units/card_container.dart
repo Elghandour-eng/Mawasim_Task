@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mawasim_task/core/router/router.dart';
+import 'package:mawasim_task/features/otp_view/units/view.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
 import '../../../core/app_images/app_images.dart';
@@ -13,10 +15,12 @@ Widget sendCodeContainer(
     String? text1,
     String? text2,
     String? image,
+    bool? phone,
+    String? email,
     void Function()? onTap}) {
   return  BlocConsumer<SignUpBloc,SignIUpState>(
   listener: (context,state){
-    if(state is CodeSendFailure){
+    if(state is CodeSendFailure) {
       MotionToast.error(
         title:const  Text("حدث خطا ما"),
         description:const  Text("يرجي المحاوله مره اخري"),
@@ -26,6 +30,7 @@ Widget sendCodeContainer(
     }
     else if(state is CodeSendSuccess){
       ///Router
+      MagicRouter.navigateTo( OtpView(email:email??'' ,isPhone:phone ,));
     }
   },
 
@@ -38,7 +43,9 @@ Widget sendCodeContainer(
             borderRadius: BorderRadius.circular(5.r),
             color: Colors.green.shade100.withOpacity(.2),
             border: Border.all(color: ColorManager.textColor2)),
-        child: Row(
+        child:state is SignUpLoadingProgress?
+        const Center(child: CircularProgressIndicator.adaptive( )):
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(

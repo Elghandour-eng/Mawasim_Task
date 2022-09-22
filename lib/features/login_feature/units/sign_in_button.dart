@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mawasim_task/features/get_services_feature/get_services_view_page.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
-
 import '../../../core/router/router.dart';
-import '../../services_features/view.dart';
 import '../bloc/bloc.dart';
 import '../login_view.dart';
 
@@ -18,7 +17,7 @@ class LoginButton extends StatelessWidget {
     return BlocConsumer<SignInBloc,SignInState>(
         listener: (context,state){
           if(state is SignInSuccess) {
-            MagicRouter.navigateTo(const ServicesView());
+            MagicRouter.navigateTo(const ServicesViewPage());
             SignInBloc.get(context).identifyIdController.clear();
             SignInBloc.get(context).passwordController.clear();
 

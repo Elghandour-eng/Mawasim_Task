@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mawasim_task/core/color_manager/color_manager.dart';
 import 'package:mawasim_task/features/sign_up_feature/bloc/bloc.dart';
 import 'package:mawasim_task/widgets/pop_scaffold.dart';
+import 'package:services_repository/services_repository.dart';
 import 'core/app_constants/constants.dart';
 import 'core/router/router.dart';
 import 'core/utils/observer.dart';
@@ -25,6 +26,8 @@ void main() {
     providers: [
       RepositoryProvider<AuthenticationRepository>(
           create: (context) => AuthenticationRepository()),
+      RepositoryProvider<ServicesRepository>(
+          create: (context) => ServicesRepository()),
     ],
     child: const MawasimTask(),
   ));

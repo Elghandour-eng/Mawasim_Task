@@ -42,3 +42,22 @@ class SendActivationCode extends SignUpEvent {
   List<Object?> get props =>
       [email, type];
 }
+
+
+class ActivationCode extends SignUpEvent {
+  final String email;
+  final String code;
+  final String type;
+
+
+
+  const ActivationCode(
+      {required this.email,
+        required this.type,
+        required this.code
+      });
+
+  @override
+  List<Object?> get props =>
+      [email, type,code];
+}

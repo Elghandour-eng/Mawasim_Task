@@ -16,6 +16,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignIUpState> {
         super(SignUpInitial()) {
     on<SignUpButtonPressed>(_onSignUpButtonPressed);
     on<SendActivationCode>(_onSendActivationCode);
+    on<ActivationCode>(_onActivationCode);
+
   }
 
   static SignUpBloc get(context) => BlocProvider.of(context);
@@ -25,7 +27,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignIUpState> {
       passwordController = TextEditingController(),
       nameController = TextEditingController(),
       phoneController = TextEditingController(),
-      confirmPasswordController = TextEditingController()  ;
+      confirmPasswordController = TextEditingController()
+   ,otpController = TextEditingController() ;
   final formKey = GlobalKey<FormState>();
 
   void _onSignUpButtonPressed(
@@ -70,6 +73,29 @@ class SignUpBloc extends Bloc<SignUpEvent, SignIUpState> {
     } catch (err) {
      // print(err);
       emit(const CodeSendFailure(err: 'حدث خطأ ما'));
+    }
+  }
+
+
+  void _onActivationCode(
+      ActivationCode event, Emitter<SignIUpState> emit) async {
+    emit(SignUpLoadingProgress());
+    try {
+      var user = await _authenticationRepository.activateOtp(
+        email: event.email,
+        type: event.type,
+        code: event.code
+
+      );
+      emit(ActivateCodeSuccess(code: user.data?.code.toString()));
+
+      emit(SignUpInitial());
+    } on SocketException catch (e) {
+      debugPrint(e.message);
+      emit(const ActivateCodeFailure(err: 'تحقق من اتصالك بالانترنت'));
+    } catch (err) {
+      // print(err);
+      emit(const ActivateCodeFailure(err: 'حدث خطأ ما'));
     }
   }
 

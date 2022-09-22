@@ -24,14 +24,18 @@ class Validator {
   }
 
   static String? validateEmail(value) {
-    String pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regExp = RegExp(pattern);
+    // String pattern =
+    //     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    // RegExp regExp = RegExp(pattern);
     if (value.isEmpty) {
       return 'إدخل البريد الالكتروني الخاص بك';
-    } else if (regExp.hasMatch(value)) {
-      return ' البريد الالكتروني غير صالح';
-    } else {
+    }
+    // else if (!regExp.hasMatch(value)) {
+    //   return ' البريد الالكتروني غير صالح';
+    // }     // else if (!regExp.hasMatch(value)) {
+    //   return ' البريد الالكتروني غير صالح';
+    // }
+    else {
       return null;
     }
   }

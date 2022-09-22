@@ -41,6 +41,10 @@ dependencies:
 #Repositories
   auth_repo:
     path: repositories/auth_repo
+  services_repository:
+    path: repositories/services_repository
+  #Caching
+  cached_network_image:
 
 dev_dependencies:
   flutter_test:

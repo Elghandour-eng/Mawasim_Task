@@ -47,3 +47,21 @@ class CodeSendFailure extends SignIUpState {
   @override
   List<Object?> get props => [err];
 }
+
+class ActivateCodeSuccess extends SignIUpState {
+  final String? code;
+
+  const ActivateCodeSuccess({this.code});
+
+  @override
+  List<Object?> get props => [code];
+}
+
+class ActivateCodeFailure extends SignIUpState {
+  final String? err;
+
+  const ActivateCodeFailure({this.err});
+
+  @override
+  List<Object?> get props => [err];
+}

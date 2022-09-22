@@ -90,58 +90,19 @@ class AuthenticationRepository {
     return ActivateResponse.fromJson(res.data);
   }
 
-
-
-
-  //
-  // /// Update User Password.
-  // ///
-  // /// [oldPass] parameter is Current Password.
-  // /// [newPass] parameter is New Password.
-  // /// [token] parameter  Current user token.
-  // Future<LoginResponse> updateUserPassword({
-  //   String? oldPass,
-  //   String? newPass,
-  //   required String token,
-  // }) async {
-  //   try {
-  //     var res = await _dio.post('update-password',
-  //         queryParameters: {
-  //           "current_password": newPass,
-  //           "old_password": oldPass
-  //         },
-  //         options: Options(headers: {"Authorization": "Bearer $token"}));
-  //     return LoginResponse.fromJson(res.data);
-  //   } finally {}
-  // }
-  //
-  // /// User Profile.
-  // ///
-  // /// [token] parameter  Current user token.
-  // Future<LoginResponse> getProfile({required String token}) async {
-  //   try {
-  //     var res = await _dio.post("profile",
-  //         options: Options(headers: {"Authorization": "Bearer $token"}));
-  //     return LoginResponse.fromJson(res.data);
-  //   } finally {}
-  // }
-  //
-  // /// User Profile.
-  // ///
-  // /// [token] parameter  Current user token.
-  // /// [photo] parameter Photo File.
-  // Future<LoginResponse> changeProfilePic(
-  //     {required String token, File? photo}) async {
-  //   try {
-  //     String fileImageName = photo!.path.split('/').last;
-  //     FormData formData = FormData.fromMap({
-  //       "photo":
-  //       await MultipartFile.fromFile(photo.path, filename: fileImageName),
-  //     });
-  //     var res = await _dio.post("update-photo",
-  //         data: formData,
-  //         options: Options(headers: {"Authorization": "Bearer $token"}));
-  //     return LoginResponse.fromJson(res.data);
-  //   } finally {}
-  // }
+  Future<ActivateResponse> activateOtp({
+    required String email,
+    required String type,
+    required String code
+  }) async {
+    var res = await _dio.post(
+      "active-code",
+      data: {
+        "phone_or_email": email,
+        "type":type,
+        "code":code
+      },
+    );
+    return ActivateResponse.fromJson(res.data);
+  }
 }
