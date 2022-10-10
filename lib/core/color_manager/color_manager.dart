@@ -7,8 +7,6 @@ class ColorManager {
   static const Color textColor1 = Color(0xff5BB339);
   static const Color textColor2 = Color(0xff006437);
 
-
-
 //  static const Color grey =Color(0xFFE8E8E8);
 
 }

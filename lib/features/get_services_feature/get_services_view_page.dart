@@ -12,11 +12,11 @@ class ServicesViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ServicesRepository servicesRepository =
-    RepositoryProvider.of<ServicesRepository>(context);
+        RepositoryProvider.of<ServicesRepository>(context);
 
     return BlocProvider<ServicesBloc>(
       create: (context) =>
-      ServicesBloc(servicesRepository: servicesRepository)..getServices(),
+          ServicesBloc(servicesRepository: servicesRepository)..getServices(),
       child: const ServicesViewForm(),
     );
   }
